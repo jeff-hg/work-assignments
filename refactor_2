@@ -1,0 +1,40 @@
+from random import shuffle
+
+
+class WordGame:
+    def __init__(self, words):
+        self.words = words
+        self.completion_score = 0
+
+    def guess_word(self):
+        """ Take in a word and makes the user guess what it is
+        args:
+            word: Secret word to guess. The function will print this word out in a randomized order
+            completion_score: completion score
+        return:
+            boolean based on completion
+        """
+        word_letters = []
+
+        for word in self.words:
+            for letter in word:
+                word_letters.append(letter.upper())
+                shuffle(word_letters)
+            print(f"\n{word_letters}")
+            answer = input("\nAnswer: ").lower().strip()
+            if answer == word.lower():
+                self.completion_score += 100
+                print(f"Completion_score: {self.completion_score}")
+                print("Yayy! Your answer is correct.\n")
+            else:
+                print("You didn't get it right, sorry!\n")
+            word_letters.clear()
+
+
+def main():
+    words = ["list", "elif", "time", "else"]
+    WordGame(words).guess_word()
+
+
+if __name__ == "__main__":
+    main()
